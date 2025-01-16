@@ -5,7 +5,7 @@ import transfer_model from '../models/index.js';
 const getByIdController = async (req, res) => {
     const response = new Response(res);
 
-    const { id } = req.body;
+    const { id } = req.params;
 
     if (!id) {
         return response.error([], "please provide tracking id");
