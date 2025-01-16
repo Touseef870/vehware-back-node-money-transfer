@@ -1,0 +1,43 @@
+import Response from '../../../class/response.js';
+import postData from '../services/post.js';
+import generateToken from '../../../utils/generateToken.js';
+import pkg from "jsonwebtoken";
+
+const { sign, verify } = pkg;
+
+const postController = async (req, res) => {
+    const response = new Response(res);
+
+    let user_create = {};
+    user_create.name = req.body.name;
+    user_create.email = req.body.email;
+    user_create.password = req.body.password;
+    user_create.number = req.body.number;
+    user_create.address = req.body.address;
+    user_create.country = req.body.country;
+
+    try {
+
+        const data = await postData(user_create);
+        const token = generateToken(data);
+
+        res.cookie("authToken", token, { httpOnly: true });
+
+        return response.success(data, 'Data Added successfully');
+    } catch (error) {
+
+        let messages = [];
+        if (error.errors) {
+            for (let field in error.errors) {
+                messages.push(error.errors[field].message);
+            }
+        } else {
+            messages.push(error.message);
+        }
+
+        response.error(messages, "Failed to fetch data");
+    }
+
+}
+
+export default postController;
