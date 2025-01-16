@@ -10,7 +10,8 @@ const router = Router();
 
 router.post("/add", postController)
 router.get("/get", verifyToken, getController)
-router.get("/get/:id", getByIdController)
+
+router.get("/getById", getByIdController)
 router.patch("/update/:id", verifyToken, updateController)
 router.delete("/delete/:id", verifyToken, deleteController)
 
