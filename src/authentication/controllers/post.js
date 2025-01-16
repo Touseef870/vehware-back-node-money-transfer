@@ -1,9 +1,7 @@
 import Response from '../../../class/response.js';
 import postData from '../services/post.js';
 import generateToken from '../../../utils/generateToken.js';
-import pkg from "jsonwebtoken";
 
-const { sign, verify } = pkg;
 
 const postController = async (req, res) => {
     const response = new Response(res);
@@ -23,8 +21,20 @@ const postController = async (req, res) => {
 
         res.cookie("v_mToken", token, { httpOnly: true });
 
+        delete data._doc.password;
+        delete data._doc.__v;
+
         return response.success(data, 'Data Added successfully');
     } catch (error) {
+
+        if (error.code == 11000) {
+            return response.error("Email already exists", "Failed to add data");
+        }
+
+        if (error.name === "ValidationError") {
+            return response.error(error.message);
+
+        }
 
         let messages = [];
         if (error.errors) {

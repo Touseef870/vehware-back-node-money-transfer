@@ -1,5 +1,5 @@
 import Response from '../../../class/response.js';
-import getDataById from '../services/getbyId.js';
+import Model from '../models/index.js';
 
 const getByIdController = async (req, res) => {
     const response = new Response(res);
@@ -7,9 +7,16 @@ const getByIdController = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const data = await getDataById(id);
 
-        return response.success(data);
+        const user = await Model.findById({ _id: id });
+        if (!user) {
+            return response.error("User not found");
+        }
+
+        delete user._doc.password;
+        delete user._doc.__v;
+
+        return response.success(user);
     } catch (error) {
 
         let messages = [];

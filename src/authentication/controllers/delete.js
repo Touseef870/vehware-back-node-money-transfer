@@ -1,6 +1,7 @@
 import Response from '../../../class/response.js';
 import deleteData from '../services/delete.js';
 import deCodeVerifiedToken from '../../../utils/playWithToken.js';
+import Model from '../models/index.js';
 
 const deleteController = async (req, res) => {
 
@@ -11,9 +12,14 @@ const deleteController = async (req, res) => {
 
     try {
 
+        const findUser = Model.findOne({ _id });
+        if (!findUser) {
+            return response.error("User not found");
+        }
+
         await deleteData(_id);
 
-        return response.success({id: _id}, 'Data Deleted successfully');
+        return response.success({ id: _id }, 'Data Deleted successfully');
     } catch (error) {
 
         let messages = [];

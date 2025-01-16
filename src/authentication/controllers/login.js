@@ -1,8 +1,9 @@
 import Response from '../../../class/response.js';
 import login from '../services/get.js';
 import generateToken from '../../../utils/generateToken.js';
+import Model from '../models/index.js';
 
-const getController = async (req, res) => {
+const loginController = async (req, res) => {
     const response = new Response(res);
 
     let user_login = {};
@@ -10,11 +11,24 @@ const getController = async (req, res) => {
     user_login.password = req.body.password;
 
     try {
+
+        const findUser = await Model.findOne({ email: user_login.email });
+        if (!findUser) {
+            return response.error("User not found");
+        }
+
+        const isMatch = await findUser.isPasswordValid(user_login.password);
+        if (!isMatch) {
+            return response.error("Password is incorrect");
+        }
+
         const data = await login(user_login);
 
         const token = generateToken(data);
+        res.cookie("v_mToken", token, { httpOnly: true });
 
-        res.cookie("authToken", token, { httpOnly: true });
+        delete data._doc.password;
+        delete data._doc.__v;
 
         return response.success(data);
     } catch (error) {
@@ -32,4 +46,4 @@ const getController = async (req, res) => {
     }
 }
 
-export default getController;
+export default loginController;

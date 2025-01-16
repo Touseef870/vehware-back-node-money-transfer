@@ -4,28 +4,33 @@ import bcrypt from "bcrypt";
 const dataSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: [true, "Name is required"],
+        minlength: [3, "Name must be at least 3 characters long"],
+        maxlength: [20, "Name must be at most 20 characters long"]
     },
     email: {
         type: String,
-        required: true,
-        unique: true
+        required: [true, "Email is required"],
+        unique: true,
+        match: [/.+@.+\..+/, "Please enter a valid email"]
     },
     password: {
         type: String,
-        required: true
+        required: [true, "Password is required"],
+        minlength: [6, "Password must be at least 6 characters long"],
+        maxlength: [25, "Password must be at most 25 characters long"]
     },
     number: {
         type: String,
-        required: true
+        required: [true, "Phone number is required"]
     },
     address: {
         type: String,
-        required: true
+        required: [true, "Address is required"]
     },
     country: {
         type: String,
-        required: true
+        required: [true, "Country is required"]
     },
 }, { timestamps: true });
 
