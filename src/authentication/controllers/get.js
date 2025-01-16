@@ -5,7 +5,7 @@ import generateToken from '../../../utils/generateToken.js';
 const getController = async (req, res) => {
     const response = new Response(res);
 
-    const user_login = {};
+    let user_login = {};
     user_login.email = req.body.email;
     user_login.password = req.body.password;
 

@@ -1,13 +1,12 @@
 import Response from '../../../class/response.js';
-import pkg from "jsonwebtoken";
 import postData from "../services/post.js"
+import { generateTrackingId } from "../../../utils/index.js";
 
-const { sign, verify } = pkg;
 
 const postController = async (req, res) => {
     const response = new Response(res);
 
-    const create_transfer = {};
+    let create_transfer = {};
 
     create_transfer.sender = {
         name: req.body.sender.name,
@@ -18,7 +17,7 @@ const postController = async (req, res) => {
     }
     create_transfer.cashAmount = req.body.cashAmount;
     create_transfer.purposeOfTransfer = req.body.purposeOfTransfer;
-    create_transfer.paymentTracking = req.body.paymentTracking;
+    create_transfer.paymentLocation = req.body.location;
     create_transfer.receiver = {
         name: req.body.receiver.name,
         email: req.body.receiver.email,
@@ -28,6 +27,9 @@ const postController = async (req, res) => {
     }
 
     try {
+
+        // Generate paymentTrackingId
+        create_transfer.paymentTrackingId = generateTrackingId();
 
         const data = await postData(create_transfer);
 

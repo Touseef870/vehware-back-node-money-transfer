@@ -5,7 +5,7 @@ const transferSchema = new Schema(
         sender: {
             name: {
                 type: String,
-                required: true
+                required: [true, 'Please provide sender name']
             },
             email: {
                 type: String,
@@ -14,33 +14,38 @@ const transferSchema = new Schema(
             },
             number: {
                 type: String,
-                required: true
+                required: [true, 'Please provide sender number']
             },
             address: {
                 type: String,
-                required: true
+                required: [true, 'Please provide sender address']
             },
             country: {
                 type: String,
-                required: true
+                required: [true, 'Please provide sender country']
             },
         },
         cashAmount: {
             type: Number,
-            required: true
+            required: [true, 'Please provide amount to transfer']
         },
         purposeOfTransfer: {
             type: String,
-            required: true
+            required: [true, 'Please provide purpose of transfer'],
+            default: 'Miscellaneous'
         },
-        paymentTracking: {
+        paymentTrackingId: {
             type: String,
-            required: true
+            required: [true, 'TrackingId is missing']
+        },
+        paymentLocation: {
+            type: String,
+            required: [true, 'Please provide payment location']
         },
         receiver: {
             name: {
                 type: String,
-                required: true
+                required: [true, 'Please provide receiver name']
             },
             email: {
                 type: String,
@@ -49,15 +54,15 @@ const transferSchema = new Schema(
             },
             number: {
                 type: String,
-                required: true
+                required: [true, 'Please provide receiver number']
             },
             address: {
                 type: String,
-                required: true
+                required: [true, 'Please provide receiver address']
             },
             country: {
                 type: String,
-                required: true
+                required: [true, 'Please provide receiver country']
             },
         },
     },

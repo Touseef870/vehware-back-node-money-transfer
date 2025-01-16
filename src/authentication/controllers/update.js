@@ -1,10 +1,10 @@
 import Response from '../../../class/response.js';
 import updateData from '../services/update.js';
-import deCodeVerifiedToken from '../../../utils/playWithToken.js';
+import { decodeVerifiedToken } from '../../../utils/index.js';
 
 const updateController = async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
-    let { _id } = deCodeVerifiedToken(token)
+    let { _id } = decodeVerifiedToken(token)
 
     const response = new Response(res);
 

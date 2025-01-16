@@ -8,7 +8,33 @@ const getController = async (req, res) => {
 
         const data = await getData();
 
-        return response.success(data, 'Data fetched successfully');
+        const get_transfer_data = data.map((transfer) => {
+            return {
+                _id: transfer._id,
+                paymentTrackingId: transfer.paymentTrackingId,
+                sender: {
+                    name: transfer.sender.name,
+                    email: transfer.sender.email,
+                    number: transfer.sender.number,
+                    address: transfer.sender.address,
+                    country: transfer.sender.country
+                },
+                cashAmount: transfer.cashAmount,
+                purposeOfTransfer: transfer.purposeOfTransfer,
+                paymentLocation: transfer.paymentLocation,
+                receiver: {
+                    name: transfer.receiver.name,
+                    email: transfer.receiver.email,
+                    number: transfer.receiver.number,
+                    address: transfer.receiver.address,
+                    country: transfer.receiver.country
+                },
+                createdAt: transfer.createdAt,
+                updatedAt: transfer.updatedAt
+            }
+        });
+
+        return response.success(get_transfer_data);
     } catch (error) {
 
         let messages = [];

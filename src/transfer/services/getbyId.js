@@ -1,7 +1,7 @@
 import { getById } from "../db/index.js";
 
-const updateData = async (id, data) => {
-    return await getById(id, data);
+const getDataById = async (id) => {
+    return await getById(id);
 }
 
-export default updateData;
+export default getDataById;

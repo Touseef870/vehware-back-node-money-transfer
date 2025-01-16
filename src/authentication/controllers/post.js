@@ -21,7 +21,7 @@ const postController = async (req, res) => {
         const data = await postData(user_create);
         const token = generateToken(data);
 
-        res.cookie("authToken", token, { httpOnly: true });
+        res.cookie("v_mToken", token, { httpOnly: true });
 
         return response.success(data, 'Data Added successfully');
     } catch (error) {
