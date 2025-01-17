@@ -14,10 +14,10 @@ const getByIdController = async (req, res) => {
             return response.error("User not found");
         }
 
-        delete user._doc.password;
-        delete user._doc.__v;
+        delete data._doc.password;
+        delete data._doc.__v;
 
-        return response.success(user);
+        return response.success(data);
     } catch (error) {
 
         let messages = [];
