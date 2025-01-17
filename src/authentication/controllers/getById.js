@@ -1,5 +1,5 @@
 import Response from '../../../class/response.js';
-import getDataById from "../services/getById.js";
+import { getById } from "../db/index.js";
 
 const getByIdController = async (req, res) => {
     const response = new Response(res);
@@ -9,7 +9,7 @@ const getByIdController = async (req, res) => {
     try {
 
 
-        const data = await getDataById(id);
+        const data = await getById(id);
         if (!data) {
             return response.error("User not found");
         }
