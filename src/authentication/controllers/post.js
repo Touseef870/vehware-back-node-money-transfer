@@ -19,11 +19,12 @@ const postController = async (req, res) => {
         const data = await postData(user_create);
         const token = generateToken(data);
 
-        res.cookie('v_mToken', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }); // 24 hours
-        // res.cookie("v_mToken", token, { httpOnly: true });
+        // res.cookie('v_mToken', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }); // 24 hours
+        // Set cookie
+        res.cookie("v_mToken", token, { httpOnly: true });
 
-        delete data._doc.password;
-        delete data._doc.__v;
+        delete data.password;
+        delete data.__v;
 
         return response.success(data, 'Data Added successfully');
     } catch (error) {
