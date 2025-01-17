@@ -25,7 +25,8 @@ const loginController = async (req, res) => {
         const data = await login(user_login);
 
         const token = generateToken(data);
-        res.cookie("v_mToken", token, { httpOnly: true });
+        // res.cookie("v_mToken", token, { httpOnly: true });
+        res.cookie('v_mToken', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }); // 24 hours
 
         delete data._doc.password;
         delete data._doc.__v;

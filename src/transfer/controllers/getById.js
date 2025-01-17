@@ -1,6 +1,5 @@
 import Response from '../../../class/response.js';
 import getDataById from '../services/getbyId.js';
-import transfer_model from '../models/index.js';
 
 const getByIdController = async (req, res) => {
     const response = new Response(res);
@@ -13,13 +12,11 @@ const getByIdController = async (req, res) => {
 
     try {
 
-        const isExist = await transfer_model.findOne({ paymentTrackingId: id });
-        if (!isExist) {
+        const data = await getDataById(id);
+        if (!data) {
             return response.error([], "Data not found, please provide a valid tracking id");
         }
-
-        const data = await getDataById(id);
-
+        
         let get_transfer_data = {
             _id: data._id,
             paymentTrackingId: data.paymentTrackingId,
@@ -28,7 +25,8 @@ const getByIdController = async (req, res) => {
                 email: data.sender.email,
                 number: data.sender.number,
                 address: data.sender.address,
-                country: data.sender.country
+                country: data.sender.country,
+                _id: data.sender._id
             },
             cashAmount: data.cashAmount,
             purposeOfTransfer: data.purposeOfTransfer,
@@ -38,7 +36,8 @@ const getByIdController = async (req, res) => {
                 email: data.receiver.email,
                 number: data.receiver.number,
                 address: data.receiver.address,
-                country: data.receiver.country
+                country: data.receiver.country,
+                _id: data.receiver._id
             },
             createdAt: data.createdAt,
             updatedAt: data.updatedAt

@@ -17,7 +17,8 @@ const getController = async (req, res) => {
                     email: transfer.sender.email,
                     number: transfer.sender.number,
                     address: transfer.sender.address,
-                    country: transfer.sender.country
+                    country: transfer.sender.country,
+                    _id: transfer.sender._id
                 },
                 cashAmount: transfer.cashAmount,
                 purposeOfTransfer: transfer.purposeOfTransfer,
@@ -27,7 +28,8 @@ const getController = async (req, res) => {
                     email: transfer.receiver.email,
                     number: transfer.receiver.number,
                     address: transfer.receiver.address,
-                    country: transfer.receiver.country
+                    country: transfer.receiver.country,
+                    _id: transfer.receiver._id
                 },
                 createdAt: transfer.createdAt,
                 updatedAt: transfer.updatedAt
