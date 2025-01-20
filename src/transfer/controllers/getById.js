@@ -16,7 +16,7 @@ const getByIdController = async (req, res) => {
         if (!data) {
             return response.error([], "Data not found, please provide a valid tracking id");
         }
-        
+
         let get_transfer_data = {
             _id: data._id,
             paymentTrackingId: data.paymentTrackingId,
@@ -30,7 +30,7 @@ const getByIdController = async (req, res) => {
             },
             cashAmount: data.cashAmount,
             purposeOfTransfer: data.purposeOfTransfer,
-            paymentLocation: data.paymentLocation,
+            paymentLocation: data.currentLocation,
             receiver: {
                 name: data.receiver.name,
                 email: data.receiver.email,

@@ -22,7 +22,7 @@ const getController = async (req, res) => {
                 },
                 cashAmount: transfer.cashAmount,
                 purposeOfTransfer: transfer.purposeOfTransfer,
-                paymentLocation: transfer.paymentLocation,
+                paymentLocation: transfer.currentLocation,
                 receiver: {
                     name: transfer.receiver.name,
                     email: transfer.receiver.email,
