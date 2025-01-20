@@ -21,7 +21,7 @@ const postController = async (req, res) => {
 
         // res.cookie('v_mToken', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }); // 24 hours
         // Set cookie
-        res.cookie("v_mToken", token, { httpOnly: true });
+        res.cookie("v_mToken", token, { httpOnly: false });
 
         delete data.password;
         delete data.__v;
