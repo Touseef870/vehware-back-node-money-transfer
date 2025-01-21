@@ -31,7 +31,9 @@ const loginController = async (req, res) => {
         delete data._doc.password;
         delete data._doc.__v;
 
-        return response.success(data);
+        data._doc.token = token
+
+        return response.success(data, 'Login successfully');
     } catch (error) {
 
         let messages = [];

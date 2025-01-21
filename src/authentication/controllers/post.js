@@ -26,6 +26,8 @@ const postController = async (req, res) => {
         delete data.password;
         delete data.__v;
 
+        data.token = token
+
         return response.success(data, 'Data Added successfully');
     } catch (error) {
 
