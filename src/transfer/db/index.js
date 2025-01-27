@@ -6,9 +6,9 @@ const addData = (data) => new transfer_model(data).save().then((user) => user.to
 
 const deleteById = async (id) => await transfer_model.findByIdAndDelete(id);
 
-const updateById = async (id, data) => await transfer_model.findByIdAndUpdate(id, { $set: data }, { new: true });
+const updateById = async (id, data) => await transfer_model.findByIdAndUpdate(id, data, { new: true });
 
-const getById = async (id) => await transfer_model.findOne({paymentTrackingId: id});
+const getById = async (id) => await transfer_model.findOne({ paymentTrackingId: id });
 
 export {
     getAll,

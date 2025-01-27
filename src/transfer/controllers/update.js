@@ -1,6 +1,5 @@
 import Response from '../../../class/response.js';
 import updateData from "../services/update.js";
-import { flattenObject } from "../../../utils/index.js";
 
 const updateController = async (req, res) => {
     const response = new Response(res);
@@ -17,9 +16,25 @@ const updateController = async (req, res) => {
             return response.error([], "Please provide data to update.");
         }
 
-        const flattenedData = flattenObject(req.body);
+        const updateObject = {};
 
-        const updatedData = await updateData(id, flattenedData);
+        if (req.body.currentLocation) {
+
+            const locations = Array.isArray(req.body.currentLocation)
+                ? req.body.currentLocation
+                : [req.body.currentLocation]; 
+
+            updateObject.$push = {
+                currentLocation: { $each: locations }
+            };
+            delete req.body.currentLocation;
+        }
+
+        if (Object.keys(req.body).length > 0) {
+            updateObject.$set = req.body;
+        }
+
+        const updatedData = await updateData(id, updateObject);
 
         if (!updatedData) {
             return response.error([], "No document found to update.");
