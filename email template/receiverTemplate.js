@@ -72,6 +72,10 @@ export default function generateReceiverEmail(data) {
             <p><strong>Address:</strong> ${receiver.address}</p>
             <p><strong>Country:</strong> ${receiver.country}</p>
             <p><strong>receiver ID:</strong> ${receiver.uniqueReceiverId}</p>
+            <p><strong>receiver ID:</strong> ${data.cashAmount}</p>
+            <p><strong>receiver ID:</strong> ${data.purposeOfTransfer}</p>
+            <p><strong>receiver ID:</strong> ${data.currentLocation}</p>
+            <p><strong>receiver ID:</strong> ${data.paymentTrackingId}</p>
         </div>
         <div class="email-footer">
             <p>Thank you for using our service.</p>

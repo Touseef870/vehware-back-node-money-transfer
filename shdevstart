@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# Build the Docker image
-docker build -t vehware-crm-node-backedn .
+# Stop and remove all running containers
+docker-compose down
 
-# Run the Docker container
-docker run -p 3000:3000 vehware-crm-node-backedn
+# Rebuild the images without cache
+docker-compose build --no-cache
 
+# Start the containers
+docker-compose up
