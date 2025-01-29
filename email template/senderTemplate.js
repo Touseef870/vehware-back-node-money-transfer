@@ -72,10 +72,10 @@ export default function generateSenderEmail(data) {
             <p><strong>Address:</strong> ${sender.address}</p>
             <p><strong>Country:</strong> ${sender.country}</p>
             <p><strong>Sender ID:</strong> ${sender.uniqueSenderId}</p>
-            <p><strong>receiver ID:</strong> ${data.cashAmount}</p>
-            <p><strong>receiver ID:</strong> ${data.purposeOfTransfer}</p>
-            <p><strong>receiver ID:</strong> ${data.currentLocation}</p>
-            <p><strong>receiver ID:</strong> ${data.paymentTrackingId}</p>
+            <p><strong>Cash Amount:</strong> ${data.cashAmount}</p>
+            <p><strong>Purpose Of Transfer:</strong> ${data.purposeOfTransfer}</p>
+            <p><strong>Current Location:</strong> ${data.currentLocation}</p>
+            <p><strong>Payment Tracking ID:</strong> ${data.paymentTrackingId}</p>
         </div>
         <div class="email-footer">
             <p>Thank you for using our service.</p>
